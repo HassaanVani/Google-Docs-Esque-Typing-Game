@@ -1,9 +1,9 @@
 .menu-bar {
   display: flex;
   align-items: center;
-  padding: 0 8px 0 44px;
+  padding: 0 8px 2px 52px;
   background: #fff;
-  height: 28px;
+  height: 24px;
 }
 
 .menu-items {
@@ -14,7 +14,7 @@
 
 .menu-item {
   position: relative;
-  padding: 2px 8px;
+  padding: 1px 7px;
   border-radius: 4px;
   cursor: pointer;
   user-select: none;
@@ -22,15 +22,15 @@
 
 .menu-item:hover,
 .menu-item.active {
-  background: #e8eaed;
+  background: rgba(32, 33, 36, 0.08);
 }
 
 .menu-label {
-  font-size: 13.333px;
+  font-size: 14px;
   color: #202124;
   font-family: 'Roboto', Arial, sans-serif;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 20px;
 }
 
 .menu-dropdown {
@@ -49,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 16px;
+  padding: 5px 16px;
   cursor: pointer;
   font-size: 13px;
   color: #202124;
@@ -58,7 +58,7 @@
 }
 
 .menu-dropdown-item:hover:not(.disabled) {
-  background: #e8eaed;
+  background: rgba(32, 33, 36, 0.08);
 }
 
 .menu-dropdown-item.disabled {

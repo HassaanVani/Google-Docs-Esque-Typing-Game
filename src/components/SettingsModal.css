@@ -95,6 +95,50 @@
   font-weight: 500;
 }
 
+.custom-time-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.custom-time-label {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 13px;
+  color: #5f6368;
+}
+
+.custom-time-input {
+  width: 80px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 14px;
+  color: #202124;
+  outline: none;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+
+.custom-time-input::-webkit-outer-spin-button,
+.custom-time-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.custom-time-input:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 1px #1a73e8;
+}
+
+.custom-time-unit {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 13px;
+  color: #80868b;
+}
+
 .custom-text-input {
   width: 100%;
   padding: 12px;

@@ -8,6 +8,8 @@ import DocumentArea from './components/DocumentArea';
 import StatsPanel from './components/StatsPanel';
 import ResultsModal from './components/ResultsModal';
 import SettingsModal from './components/SettingsModal';
+import LeftSidebar from './components/LeftSidebar';
+import RightSidebar from './components/RightSidebar';
 import './App.css';
 
 function App() {
@@ -21,9 +23,15 @@ function App() {
           <MenuBar onOpenSettings={() => setSettingsOpen(true)} />
           <Toolbar />
         </div>
-        <div className="app-body">
-          <Ruler />
-          <DocumentArea />
+        <div className="app-main">
+          <LeftSidebar />
+          <div className="app-center">
+            <Ruler />
+            <div className="app-body">
+              <DocumentArea />
+            </div>
+          </div>
+          <RightSidebar />
         </div>
         <div className="app-footer">
           <StatsPanel />

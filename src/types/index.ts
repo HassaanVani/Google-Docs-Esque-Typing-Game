@@ -1,6 +1,5 @@
 export type TestMode = 'time' | 'words' | 'quote' | 'custom';
 
-export type TimeDuration = 15 | 30 | 60 | 120;
 export type WordCount = 10 | 25 | 50 | 100;
 
 export type TestStatus = 'idle' | 'running' | 'finished';
@@ -12,7 +11,7 @@ export interface CharState {
 
 export interface TestConfig {
   mode: TestMode;
-  timeDuration: TimeDuration;
+  timeDuration: number;
   wordCount: WordCount;
   customText: string;
   soundEnabled: boolean;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGame } from '../context/GameContext';
-import type { TestMode, TimeDuration, WordCount } from '../types';
+import type { TestMode, WordCount } from '../types';
 import './SettingsModal.css';
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
 export default function SettingsModal({ isOpen, onClose }: Props) {
   const { state, updateConfig, resetTest, startNewTest } = useGame();
   const [customText, setCustomText] = useState(state.config.customText);
+  const [customTime, setCustomTime] = useState(String(state.config.timeDuration));
 
   if (!isOpen) return null;
 
@@ -18,8 +19,17 @@ export default function SettingsModal({ isOpen, onClose }: Props) {
     updateConfig({ mode });
   };
 
-  const handleTimeChange = (duration: TimeDuration) => {
+  const handleTimePreset = (duration: number) => {
+    setCustomTime(String(duration));
     updateConfig({ timeDuration: duration });
+  };
+
+  const handleTimeInput = (val: string) => {
+    setCustomTime(val);
+    const num = parseInt(val, 10);
+    if (!isNaN(num) && num > 0 && num <= 600) {
+      updateConfig({ timeDuration: num });
+    }
   };
 
   const handleWordCountChange = (count: WordCount) => {
@@ -34,12 +44,18 @@ export default function SettingsModal({ isOpen, onClose }: Props) {
     if (state.config.mode === 'custom') {
       updateConfig({ customText });
     }
+    if (state.config.mode === 'time') {
+      const num = parseInt(customTime, 10);
+      if (!isNaN(num) && num > 0) {
+        updateConfig({ timeDuration: Math.min(num, 600) });
+      }
+    }
     resetTest();
     setTimeout(startNewTest, 50);
     onClose();
   };
 
-  const timeDurations: TimeDuration[] = [15, 30, 60, 120];
+  const timePresets = [15, 30, 60, 120];
   const wordCounts: WordCount[] = [10, 25, 50, 100];
 
   return (
@@ -73,17 +89,29 @@ export default function SettingsModal({ isOpen, onClose }: Props) {
 
           {state.config.mode === 'time' && (
             <div className="settings-section">
-              <h3 className="section-title">Duration</h3>
+              <h3 className="section-title">Duration (seconds)</h3>
               <div className="option-buttons">
-                {timeDurations.map((t) => (
+                {timePresets.map((t) => (
                   <button
                     key={t}
                     className={`option-btn ${state.config.timeDuration === t ? 'active' : ''}`}
-                    onClick={() => handleTimeChange(t)}
+                    onClick={() => handleTimePreset(t)}
                   >
                     {t}s
                   </button>
                 ))}
+              </div>
+              <div className="custom-time-row">
+                <span className="custom-time-label">Custom:</span>
+                <input
+                  className="custom-time-input"
+                  type="number"
+                  min="1"
+                  max="600"
+                  value={customTime}
+                  onChange={(e) => handleTimeInput(e.target.value)}
+                />
+                <span className="custom-time-unit">seconds</span>
               </div>
             </div>
           )}

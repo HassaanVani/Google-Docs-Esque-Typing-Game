@@ -1,5 +1,14 @@
 import './Toolbar.css';
 
+function ToolbarDropdown({ value, width }: { value: string; width: number }) {
+  return (
+    <button className="toolbar-dropdown" style={{ width }}>
+      <span className="toolbar-dropdown-text">{value}</span>
+      <span className="material-icons toolbar-dropdown-arrow">arrow_drop_down</span>
+    </button>
+  );
+}
+
 export default function Toolbar() {
   return (
     <div className="toolbar">
@@ -31,41 +40,19 @@ export default function Toolbar() {
       <div className="toolbar-separator" />
 
       <div className="toolbar-group">
-        <select className="toolbar-select zoom-select" defaultValue="100">
-          <option value="50">50%</option>
-          <option value="75">75%</option>
-          <option value="90">90%</option>
-          <option value="100">100%</option>
-          <option value="125">125%</option>
-          <option value="150">150%</option>
-          <option value="200">200%</option>
-        </select>
+        <ToolbarDropdown value="100%" width={58} />
       </div>
 
       <div className="toolbar-separator" />
 
       <div className="toolbar-group">
-        <select className="toolbar-select style-select" defaultValue="Normal text">
-          <option>Normal text</option>
-          <option>Title</option>
-          <option>Subtitle</option>
-          <option>Heading 1</option>
-          <option>Heading 2</option>
-          <option>Heading 3</option>
-        </select>
+        <ToolbarDropdown value="Normal text" width={120} />
       </div>
 
       <div className="toolbar-separator" />
 
       <div className="toolbar-group">
-        <select className="toolbar-select font-select" defaultValue="Arial">
-          <option>Arial</option>
-          <option>Courier New</option>
-          <option>Georgia</option>
-          <option>Roboto</option>
-          <option>Times New Roman</option>
-          <option>Verdana</option>
-        </select>
+        <ToolbarDropdown value="Arial" width={110} />
       </div>
 
       <div className="toolbar-separator" />
@@ -74,7 +61,7 @@ export default function Toolbar() {
         <button className="toolbar-btn size-btn" title="Decrease font size">
           <span className="material-icons" style={{ fontSize: '14px' }}>remove</span>
         </button>
-        <input className="toolbar-size-input" type="text" defaultValue="11" />
+        <input className="toolbar-size-input" type="text" defaultValue="11" readOnly />
         <button className="toolbar-btn size-btn" title="Increase font size">
           <span className="material-icons" style={{ fontSize: '14px' }}>add</span>
         </button>
@@ -93,10 +80,10 @@ export default function Toolbar() {
           <span className="material-icons">format_underlined</span>
         </button>
         <button className="toolbar-btn" title="Text color">
-          <span className="material-icons" style={{ borderBottom: '3px solid #202124' }}>format_color_text</span>
+          <span className="material-icons toolbar-icon-underlined" data-color="#202124">format_color_text</span>
         </button>
         <button className="toolbar-btn" title="Highlight color">
-          <span className="material-icons" style={{ borderBottom: '3px solid #fbbc04' }}>highlight</span>
+          <span className="material-icons toolbar-icon-underlined" data-color="#fbbc04">highlight</span>
         </button>
       </div>
 
@@ -123,6 +110,9 @@ export default function Toolbar() {
         <button className="toolbar-btn" title="Line & paragraph spacing">
           <span className="material-icons">format_line_spacing</span>
         </button>
+        <button className="toolbar-btn" title="Checklist">
+          <span className="material-icons">checklist</span>
+        </button>
         <button className="toolbar-btn" title="Bulleted list (Ctrl+Shift+8)">
           <span className="material-icons">format_list_bulleted</span>
         </button>
@@ -135,6 +125,11 @@ export default function Toolbar() {
         <button className="toolbar-btn" title="Increase indent (Ctrl+])">
           <span className="material-icons">format_indent_increase</span>
         </button>
+      </div>
+
+      <div className="toolbar-separator" />
+
+      <div className="toolbar-group">
         <button className="toolbar-btn" title="Clear formatting (Ctrl+\\)">
           <span className="material-icons">format_clear</span>
         </button>
@@ -142,11 +137,15 @@ export default function Toolbar() {
 
       <div className="toolbar-spacer" />
 
-      <div className="toolbar-group editing-group">
-        <span className="material-icons" style={{ fontSize: '16px', color: '#444746' }}>edit</span>
+      <button className="toolbar-btn editing-btn" title="Editing mode">
+        <span className="material-icons" style={{ fontSize: '16px' }}>edit</span>
         <span className="editing-label">Editing</span>
-        <span className="material-icons" style={{ fontSize: '16px', color: '#444746' }}>arrow_drop_down</span>
-      </div>
+        <span className="material-icons" style={{ fontSize: '18px' }}>arrow_drop_down</span>
+      </button>
+
+      <button className="toolbar-btn collapse-btn" title="Hide the menus (Ctrl+Shift+F)">
+        <span className="material-icons">expand_less</span>
+      </button>
     </div>
   );
 }
