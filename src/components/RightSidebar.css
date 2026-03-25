@@ -33,10 +33,3 @@
 .sidebar-icon-btn:hover {
   background: #f1f3f4;
 }
-
-.sidebar-divider {
-  width: 24px;
-  height: 1px;
-  background: #dadce0;
-  margin: 6px 0;
-}

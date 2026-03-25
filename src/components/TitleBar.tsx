@@ -31,9 +31,6 @@ export default function TitleBar() {
           <span className="material-icons" style={{ fontSize: '16px', marginRight: '6px' }}>lock</span>
           Share
         </button>
-        <button className="icon-btn bookmark-btn" title="Bookmark">
-          <span className="material-icons-outlined">bookmark_border</span>
-        </button>
         <div className="user-avatar" title="Google Account">
           <span>H</span>
         </div>

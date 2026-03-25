@@ -57,7 +57,7 @@
 .typing-text {
   font-family: Arial, sans-serif;
   font-size: 11pt;
-  line-height: 1.75;
+  line-height: 1.15;
   user-select: none;
   word-break: normal;
   overflow-wrap: normal;

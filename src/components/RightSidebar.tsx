@@ -24,11 +24,10 @@ export default function RightSidebar() {
             <path fill="#34A853" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
           </svg>
         </button>
+        <button className="sidebar-icon-btn" title="Get Add-ons">
+          <span className="material-icons" style={{ fontSize: '20px', color: '#5f6368' }}>add</span>
+        </button>
       </div>
-      <div className="sidebar-divider" />
-      <button className="sidebar-icon-btn" title="Get Add-ons">
-        <span className="material-icons" style={{ fontSize: '20px', color: '#5f6368' }}>add</span>
-      </button>
     </div>
   );
 }
