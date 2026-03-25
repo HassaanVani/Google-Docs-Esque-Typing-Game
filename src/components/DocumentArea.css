@@ -1,0 +1,114 @@
+.document-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0 40px;
+  min-height: 100%;
+  cursor: text;
+}
+
+.document-page {
+  width: 816px;
+  min-height: 1056px;
+  background: #fff;
+  box-shadow: 0 0 0 0.75pt #d1d1d1, 0 0 3pt 0.75pt #ccc;
+  padding: 96px 72px;
+  position: relative;
+  font-family: Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.5;
+  color: #000;
+}
+
+.hidden-input {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  font-size: 16px; /* Prevents iOS zoom */
+}
+
+.start-prompt {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.start-text {
+  font-family: Arial, sans-serif;
+  font-size: 11pt;
+  color: #b0b0b0;
+  cursor: text;
+}
+
+.time-indicator {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: #80868b;
+  user-select: none;
+}
+
+.typing-text {
+  font-family: Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.75;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  user-select: none;
+}
+
+.char {
+  position: relative;
+  transition: none;
+}
+
+.char.pending {
+  color: #b0b0b0;
+}
+
+.char.correct {
+  color: #000;
+}
+
+.char.incorrect {
+  color: #e53935;
+  background: #fce4ec;
+  border-radius: 1px;
+}
+
+.char.current {
+  position: relative;
+}
+
+.cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #1a73e8;
+  animation: blink 1s step-end infinite;
+  pointer-events: none;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* When typing is active, stop the blink animation for the cursor */
+.typing-text:has(.correct:last-of-type + .current) .cursor,
+.typing-text:hover .cursor {
+  animation: none;
+  opacity: 1;
+}

@@ -1,0 +1,93 @@
+.ruler-container {
+  display: flex;
+  justify-content: center;
+  background: #f8f9fa;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.ruler {
+  width: 816px;
+  height: 24px;
+  background: #fff;
+  border-bottom: 1px solid #dadce0;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  padding: 0 0 2px;
+}
+
+.ruler-track {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 96px;
+  height: 100%;
+}
+
+.ruler-tick {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ruler-tick::after {
+  content: '';
+  display: block;
+  width: 1px;
+  background: #b0b0b0;
+}
+
+.ruler-tick.inch::after {
+  height: 10px;
+}
+
+.ruler-tick.half::after {
+  height: 6px;
+}
+
+.ruler-label {
+  font-size: 9px;
+  color: #808080;
+  position: absolute;
+  bottom: 10px;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.ruler-indent-left {
+  position: absolute;
+  left: 96px;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.ruler-indent-right {
+  position: absolute;
+  right: 96px;
+  bottom: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.indent-marker {
+  color: #4285f4;
+  font-size: 10px;
+  line-height: 1;
+  user-select: none;
+}
+
+.first-line {
+  margin-bottom: -2px;
+}
+
+.left-indent {
+  margin-top: -2px;
+}

@@ -1,0 +1,21 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #fff;
+}
+
+.app-header {
+  flex-shrink: 0;
+}
+
+.app-body {
+  flex: 1;
+  overflow-y: auto;
+  background: #f8f9fa;
+  position: relative;
+}
+
+.app-footer {
+  flex-shrink: 0;
+}
