@@ -2,24 +2,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 8px 0;
+  padding: 8px 12px 0 12px;
   background: #fff;
-  height: 52px;
+  height: 48px;
 }
 
 .title-bar-left {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .docs-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  padding: 6px;
   cursor: pointer;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .docs-icon:hover {
@@ -27,14 +28,13 @@
 }
 
 .docs-icon svg {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
 }
 
 .title-section {
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 .title-row {
@@ -83,14 +83,7 @@
 .title-bar-right {
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.last-edit {
-  font-size: 12px;
-  color: #5f6368;
-  margin-right: 4px;
-  white-space: nowrap;
+  gap: 6px;
 }
 
 .share-btn {
@@ -114,6 +107,10 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
+.bookmark-btn .material-icons-outlined {
+  font-size: 20px;
+}
+
 .user-avatar {
   width: 32px;
   height: 32px;
@@ -126,5 +123,5 @@
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  margin-left: 4px;
+  margin-left: 2px;
 }

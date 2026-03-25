@@ -3,6 +3,13 @@ import './Toolbar.css';
 export default function Toolbar() {
   return (
     <div className="toolbar">
+      <button className="toolbar-btn menus-btn" title="Search the menus (Alt+/)">
+        <span className="material-icons" style={{ fontSize: '16px' }}>search</span>
+        <span className="menus-label">Menus</span>
+      </button>
+
+      <div className="toolbar-separator" />
+
       <div className="toolbar-group">
         <button className="toolbar-btn" title="Undo (Ctrl+Z)">
           <span className="material-icons">undo</span>
@@ -113,20 +120,6 @@ export default function Toolbar() {
         <button className="toolbar-btn" title="Left align (Ctrl+Shift+L)">
           <span className="material-icons">format_align_left</span>
         </button>
-        <button className="toolbar-btn" title="Center align (Ctrl+Shift+E)">
-          <span className="material-icons">format_align_center</span>
-        </button>
-        <button className="toolbar-btn" title="Right align (Ctrl+Shift+R)">
-          <span className="material-icons">format_align_right</span>
-        </button>
-        <button className="toolbar-btn" title="Justify (Ctrl+Shift+J)">
-          <span className="material-icons">format_align_justify</span>
-        </button>
-      </div>
-
-      <div className="toolbar-separator" />
-
-      <div className="toolbar-group">
         <button className="toolbar-btn" title="Line & paragraph spacing">
           <span className="material-icons">format_line_spacing</span>
         </button>
@@ -145,6 +138,14 @@ export default function Toolbar() {
         <button className="toolbar-btn" title="Clear formatting (Ctrl+\\)">
           <span className="material-icons">format_clear</span>
         </button>
+      </div>
+
+      <div className="toolbar-spacer" />
+
+      <div className="toolbar-group editing-group">
+        <span className="material-icons" style={{ fontSize: '16px', color: '#444746' }}>edit</span>
+        <span className="editing-label">Editing</span>
+        <span className="material-icons" style={{ fontSize: '16px', color: '#444746' }}>arrow_drop_down</span>
       </div>
     </div>
   );

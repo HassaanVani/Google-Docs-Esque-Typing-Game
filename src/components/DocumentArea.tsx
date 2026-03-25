@@ -1,9 +1,9 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useMemo } from 'react';
 import { useGame } from '../context/GameContext';
 import './DocumentArea.css';
 
 export default function DocumentArea() {
-  const { state, startNewTest, handleKeyPress, handleBackspace } = useGame();
+  const { state, startNewTest, handleKeyPress, handleBackspace, resetTest } = useGame();
   const containerRef = useRef<HTMLDivElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const activeCharRef = useRef<HTMLSpanElement>(null);
@@ -26,7 +26,6 @@ export default function DocumentArea() {
       const charRect = activeCharRef.current.getBoundingClientRect();
       const containerRect = containerRef.current.getBoundingClientRect();
 
-      // If cursor is below visible area, scroll down
       if (charRect.bottom > containerRect.bottom - 100) {
         containerRef.current.scrollTop += charRect.bottom - containerRect.bottom + 150;
       }
@@ -34,9 +33,11 @@ export default function DocumentArea() {
   }, [state.currentIndex]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    // Prevent default browser behavior for typing
+    // Tab = quick reset
     if (e.key === 'Tab') {
       e.preventDefault();
+      resetTest();
+      setTimeout(startNewTest, 50);
       return;
     }
 
@@ -53,54 +54,75 @@ export default function DocumentArea() {
       e.preventDefault();
       handleKeyPress(e.key);
     }
-  }, [state.status, handleKeyPress, handleBackspace]);
+  }, [state.status, handleKeyPress, handleBackspace, resetTest, startNewTest]);
 
   const getTimeDisplay = () => {
     if (state.config.mode === 'time') {
-      const remaining = Math.max(0, state.config.timeDuration - Math.floor(state.elapsedTime));
-      return remaining;
+      return Math.max(0, state.config.timeDuration - Math.floor(state.elapsedTime));
     }
     return Math.floor(state.elapsedTime);
   };
 
-  const renderText = () => {
+  // Group characters into words so the browser wraps at word boundaries
+  const wordElements = useMemo(() => {
     if (!state.chars.length) return null;
 
-    // For time mode, show a window of text around current position
-    const visibleChars = state.chars;
+    const words: { startIdx: number; chars: typeof state.chars }[] = [];
+    let currentWord: typeof state.chars = [];
+    let wordStart = 0;
 
-    return visibleChars.map((charState, idx) => {
-      const isCurrent = idx === state.currentIndex;
-      let className = 'char';
-
-      switch (charState.status) {
-        case 'correct':
-          className += ' correct';
-          break;
-        case 'incorrect':
-          className += ' incorrect';
-          break;
-        case 'pending':
-          className += ' pending';
-          break;
+    state.chars.forEach((charState, idx) => {
+      if (charState.char === ' ') {
+        if (currentWord.length > 0) {
+          words.push({ startIdx: wordStart, chars: currentWord });
+          currentWord = [];
+        }
+        // Push space as its own "word"
+        words.push({ startIdx: idx, chars: [charState] });
+        wordStart = idx + 1;
+      } else {
+        if (currentWord.length === 0) wordStart = idx;
+        currentWord.push(charState);
       }
-
-      if (isCurrent) {
-        className += ' current';
-      }
-
-      return (
-        <span
-          key={idx}
-          className={className}
-          ref={isCurrent ? activeCharRef : undefined}
-        >
-          {charState.char === ' ' ? '\u00A0' : charState.char}
-          {isCurrent && <span className="cursor" />}
-        </span>
-      );
     });
-  };
+    if (currentWord.length > 0) {
+      words.push({ startIdx: wordStart, chars: currentWord });
+    }
+
+    let globalIdx = 0;
+    return words.map((word, wIdx) => {
+      const isSpace = word.chars.length === 1 && word.chars[0].char === ' ';
+
+      const charSpans = word.chars.map((charState) => {
+        const idx = globalIdx++;
+        const isCurrent = idx === state.currentIndex;
+        let className = 'char';
+
+        switch (charState.status) {
+          case 'correct': className += ' correct'; break;
+          case 'incorrect': className += ' incorrect'; break;
+          case 'pending': className += ' pending'; break;
+        }
+        if (isCurrent) className += ' current';
+
+        return (
+          <span
+            key={idx}
+            className={className}
+            ref={isCurrent ? activeCharRef : undefined}
+          >
+            {isSpace ? ' ' : charState.char}
+            {isCurrent && <span className="cursor" />}
+          </span>
+        );
+      });
+
+      if (isSpace) {
+        return <span key={`s-${wIdx}`} className="word-space">{charSpans}</span>;
+      }
+      return <span key={`w-${wIdx}`} className="word">{charSpans}</span>;
+    });
+  }, [state.chars, state.currentIndex]);
 
   return (
     <div className="document-wrapper" ref={containerRef} onClick={focusInput}>
@@ -123,7 +145,7 @@ export default function DocumentArea() {
               <div className="time-indicator">{getTimeDisplay()}</div>
             )}
             <div className="typing-text">
-              {renderText()}
+              {wordElements}
             </div>
           </>
         )}

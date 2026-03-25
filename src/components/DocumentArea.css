@@ -15,7 +15,7 @@
   position: relative;
   font-family: Arial, sans-serif;
   font-size: 11pt;
-  line-height: 1.5;
+  line-height: 1.15;
   color: #000;
 }
 
@@ -26,7 +26,7 @@
   width: 1px;
   height: 1px;
   opacity: 0;
-  font-size: 16px; /* Prevents iOS zoom */
+  font-size: 16px;
 }
 
 .start-prompt {
@@ -58,14 +58,23 @@
   font-family: Arial, sans-serif;
   font-size: 11pt;
   line-height: 1.75;
-  word-wrap: break-word;
-  white-space: pre-wrap;
   user-select: none;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* Keep words together — don't break mid-word */
+.word {
+  white-space: nowrap;
+  display: inline;
+}
+
+.word-space {
+  display: inline;
 }
 
 .char {
   position: relative;
-  transition: none;
 }
 
 .char.pending {
@@ -104,11 +113,4 @@
   51%, 100% {
     opacity: 0;
   }
-}
-
-/* When typing is active, stop the blink animation for the cursor */
-.typing-text:has(.correct:last-of-type + .current) .cursor,
-.typing-text:hover .cursor {
-  animation: none;
-  opacity: 1;
 }

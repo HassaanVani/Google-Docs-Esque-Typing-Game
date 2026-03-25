@@ -10,13 +10,24 @@
 
 .ruler {
   width: 816px;
-  height: 24px;
-  background: #fff;
+  height: 20px;
+  background: #f8f9fa;
   border-bottom: 1px solid #dadce0;
   display: flex;
   align-items: flex-end;
   position: relative;
-  padding: 0 0 2px;
+  padding: 0;
+}
+
+/* White area inside the margins */
+.ruler::before {
+  content: '';
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  top: 0;
+  bottom: 0;
+  background: #fff;
 }
 
 .ruler-track {
@@ -24,8 +35,10 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 0 96px;
+  padding: 0 72px;
   height: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .ruler-tick {
@@ -43,24 +56,24 @@
 }
 
 .ruler-tick.inch::after {
-  height: 10px;
+  height: 9px;
 }
 
 .ruler-tick.half::after {
-  height: 6px;
+  height: 5px;
 }
 
 .ruler-label {
-  font-size: 9px;
+  font-size: 8px;
   color: #808080;
   position: absolute;
-  bottom: 10px;
-  font-family: 'Roboto', Arial, sans-serif;
+  bottom: 9px;
+  font-family: Arial, sans-serif;
 }
 
 .ruler-indent-left {
   position: absolute;
-  left: 96px;
+  left: 72px;
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -71,7 +84,7 @@
 
 .ruler-indent-right {
   position: absolute;
-  right: 96px;
+  right: 72px;
   bottom: 0;
   z-index: 2;
   cursor: pointer;
