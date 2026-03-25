@@ -1,12 +1,16 @@
 .left-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
   width: 370px;
   background: #fff;
   border-right: 1px solid #dadce0;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
   padding: 8px 0;
   overflow-y: auto;
+  z-index: 20;
 }
 
 .sidebar-header {
